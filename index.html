@@ -27,6 +27,8 @@
         <button type="button" onclick="desenharBresenham()">Desenhar Bresenham</button>
 
         <button type="button" onclick="desenharCirculo()">Desenhar Circulo</button>
+
+        <button type="button" onclick="desenharElipse()">Desenhar elipse</button>
     </div>
 
     <script>
@@ -215,12 +217,27 @@
             // Captura os valores inseridos pelo usuário
             let x0 = parseInt(document.getElementById('x0').value);
             let y0 = parseInt(document.getElementById('y0').value);
+            let X1 = parseInt(document.getElementById('x1').value);
+            
 
-            let points = bresenhamCircle(x0 , y0 +1,10);  
+            let points = bresenhamCircle(x0 , y0 +1, X1);  
 
             // Desenha a linha no canvas
             drawLine(points);
         }
+
+        function desenharElipse() {
+                // Captura os valores inseridos pelo usuário
+                let x0 = parseInt(document.getElementById('x0').value);
+                let y0 = parseInt(document.getElementById('y0').value);
+                let x1 = parseInt(document.getElementById('x1').value);
+                let y1 = parseInt(document.getElementById('y1').value);
+
+                let points = bresenhamEllipse(x0, y0 + 1, x1, y1 );
+
+                // Desenha a linha no canvas
+                drawLine(points);
+            }
 
     </script>
 </body>
