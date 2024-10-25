@@ -1,5 +1,7 @@
 # ProjetoFinalCG
 
 pip install Flask
+pip install matplotlib 
+pip install numpy
 
-python app.py
+python main.py
