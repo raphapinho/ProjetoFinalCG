@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algoritmo de Bresenham - Centro (0,0)</title>
+    <title>Bresenham's Line Algorithm</title>
     <style>
         canvas {
             border: 1px solid black;
@@ -11,122 +11,44 @@
     </style>
 </head>
 <body>
-    <div>
-        <h1>Algoritmo de Bresenham - Centro (0,0)</h1>
-        <canvas id="bresenhamCanvas" width="500" height="500"></canvas>
-        <p>Bresenham</p>
-        <label for="x0">x0:</label>
-        <input type="number" name="x0" id="x0" value="0">
-        <label for="y0">y0:</label>
-        <input type="number" name="y0" id="y0" value="0">
-        <label for="x1">x1:</label>
-        <input type="number" name="x1" id="x1" value="10">
-        <label for="y1">y1:</label>
-        <input type="number" name="y1" id="y1" value="10">
-
-        <button type="button" onclick="desenharBresenham()">Desenhar Bresenham</button>
-    </div>
+    <h1>Bresenham's Line Algorithm</h1>
+    <label for="x1">x1:</label>
+    <input type="number" id="x1" value="0">
+    <label for="y1">y1:</label>
+    <input type="number" id="y1" value="0">
+    <label for="x2">x2:</label>
+    <input type="number" id="x2" value="100">
+    <label for="y2">y2:</label>
+    <input type="number" id="y2" value="100">
+    <button onclick="drawLine()">Draw Line</button>
+    
+    <canvas id="canvas" width="400" height="400"></canvas>
 
     <script>
-        // Função para desenhar o grid de fundo
-        function drawGrid(ctx, canvasWidth, canvasHeight, gridSize) {
-            ctx.strokeStyle = '#ddd';  // Cor do grid
-            ctx.lineWidth = 1;
-
-            // Desenhar linhas verticais
-            for (let x = 0; x <= canvasWidth; x += gridSize) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvasHeight);
-                ctx.stroke();
-            }
-
-            // Desenhar linhas horizontais
-            for (let y = 0; y <= canvasHeight; y += gridSize) {
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(canvasWidth, y);
-                ctx.stroke();
-            }
-
-            // Desenha os eixos X e Y
-            ctx.strokeStyle = '#000';  // Cor dos eixos
-            ctx.lineWidth = 2;
-
-            // Eixo X (horizontal, passa no centro)
-            ctx.beginPath();
-            ctx.moveTo(0, canvasHeight / 2);
-            ctx.lineTo(canvasWidth, canvasHeight / 2);
-            ctx.stroke();
-
-            // Eixo Y (vertical, passa no centro)
-            ctx.beginPath();
-            ctx.moveTo(canvasWidth / 2, 0);
-            ctx.lineTo(canvasWidth / 2, canvasHeight);
-            ctx.stroke();
-        }
-
-        // Função que implementa o algoritmo de Bresenham
-        function bresenhamLine(x0, y0, x1, y1) {
-            let points = [];
-            let dx = Math.abs(x1 - x0);
-            let dy = Math.abs(y1 - y0);
-            let sx = (x0 < x1) ? 1 : -1;
-            let sy = (y0 < y1) ? 1 : -1;
-            let err = dx - dy;
-
-            while (true) {
-                points.push({x: x0, y: y0});
-                if (x0 === x1 && y0 === y1) break;
-                let e2 = 2 * err;
-                if (e2 > -dy) {
-                    err -= dy;
-                    x0 += sx;
-                }
-                if (e2 < dx) {
-                    err += dx;
-                    y0 += sy;
-                }
-            }
-            return points;
-        }
-
-        // Função para desenhar a linha no canvas
-        function drawLine(points) {
-            const canvas = document.getElementById('bresenhamCanvas');
+        function drawLine() {
+            const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Desenha o grid de fundo
-            drawGrid(ctx, canvas.width, canvas.height, 10);
-
-            // Centraliza o ponto (0, 0) no meio do canvas
-            const centerX = canvas.width  / 2;
-            const centerY = canvas.height / 2;
-
-            // Desenha cada ponto
-            ctx.fillStyle = 'blue';
-            points.forEach(point => {
-                // Desloca as coordenadas para o centro do canvas
-                const x = centerX + point.x * 10;
-                const y = centerY - point.y * 10;  // Subtraímos de 'centerY' para que as coordenadas Y aumentem para cima
-                ctx.fillRect(x, y, 10, 10);  // Desenha o ponto como um quadrado de 5x5 pixels
-            });
-        }
-
-        // Função para capturar os valores e desenhar a linha
-        function desenharBresenham() {
-            // Captura os valores inseridos pelo usuário
-            let x0 = parseInt(document.getElementById('x0').value);
-            let y0 = parseInt(document.getElementById('y0').value);
             let x1 = parseInt(document.getElementById('x1').value);
             let y1 = parseInt(document.getElementById('y1').value);
+            let x2 = parseInt(document.getElementById('x2').value);
+            let y2 = parseInt(document.getElementById('y2').value);
 
-            // Pega os pontos da linha de Bresenham
-            let points = bresenhamLine(x0 , y0+1, x1, y1+1);  // Sim isso é uma pequena gambiarra
-
-            // Desenha a linha no canvas
-            drawLine(points);
+            // Enviar uma requisição POST ao servidor Flask com os valores
+            fetch('/bresenham', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ x1, y1, x2, y2 }),
+            })
+            .then(response => response.json())
+            .then(points => {
+                points.forEach(point => {
+                    ctx.fillRect(point[0], point[1], 1, 1); // Desenha cada ponto no canvas
+                });
+            });
         }
     </script>
 </body>
