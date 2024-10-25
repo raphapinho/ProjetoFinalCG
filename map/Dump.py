@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
-import RPi.GPIO as GPIO, mfrc522, signal
+import RPi.GPIO as GPIO, src.mfrc522 as mfrc522, signal
 
 continue_reading = True
 

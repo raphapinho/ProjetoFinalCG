@@ -15,7 +15,7 @@ def draw_grid(grid_size, points):
 
 def get_polyline_points(num_lines):
     points = []
-    for i in range(num_lines + 1):  # Precisamos de um ponto adicional para a última linha
+    for i in range(num_lines + 1):
         x, y = map(int, input(f"Digite as coordenadas do ponto {i + 1} (x y): ").split())
         points.append((x, y))
     return points
