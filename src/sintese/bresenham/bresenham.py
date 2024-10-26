@@ -24,7 +24,7 @@ def bresenham(x1, y1, x2, y2):
 
 @app.route('/')
 def index():
-    return render_template('bresenham.html')
+    return render_template('dram_brese.html')
 
 @app.route('/bresenham', methods=['POST'])
 def calculate_bresenham():

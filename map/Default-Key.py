@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import RPi.GPIO as GPIO, src.mfrc522 as mfrc522, signal, sys, time, re, argparse
+import RPi.GPIO as GPIO, sintese.mfrc522 as mfrc522, signal, sys, time, re, argparse
 
 parser = argparse.ArgumentParser(description='Default Key Bruteforcer is a python brute force program for cracking the authentication key for Mifare RC522 compliant RFID tags.')
 parser.add_argument('-t', '--type', help='This option is used to specify the type of bruteforce, currently only pure is supported for the option. Pure bruteforce is 100% effective; however, it takes a while. ./Default-Key-Bruteforcer.py -t pure')
