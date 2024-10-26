@@ -3,9 +3,9 @@
 ## Instalar as dependências
 
 ```
-pip install Flask
-pip install matplotlib 
+pip install flask
 pip install numpy
+pip install matplotlib 
 ```
 
 ## Iniciar o projeto
