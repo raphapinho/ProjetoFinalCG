@@ -35,6 +35,7 @@
             let x2 = parseInt(document.getElementById('x2').value);
             let y2 = parseInt(document.getElementById('y2').value);
 
+            // Enviar uma requisição POST ao servidor Flask com os valores
             fetch('/bresenham', {
                 method: 'POST',
                 headers: {
