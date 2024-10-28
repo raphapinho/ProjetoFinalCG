@@ -8,7 +8,7 @@ O trabalho prático envolve duas partes principais:
         - [x]  **Círculos e Elipses** (0.5 cada)
         - [x]  **Curvas de Bézier** (graus 2 e 3) (0.5 cada)
         - [x]  **Polilinha** (0.5)
-        - [ ]  **Preenchimento Recursivo** (0.25) e **Varredura** (0.25)
+        - [x]  **Preenchimento Recursivo** (0.25) e **Varredura** (0.25)
         - [ ]  **Recorte de linha** (0.25) e **Recorte de polígono** (0.5)
         - [ ]  **Transformações básicas** (rotação, translação, escala) (0.5 cada)
         - [ ]  **Projeções** (Ortogonal, Oblíqua e Perspectiva) (0.5 cada)
