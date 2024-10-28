@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenho de Polígono</title>
+    <script type="module" src="polygon.mjs"></script>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600" style="border:1px solid black;"></canvas>
+    <script type="module">
+        import { startPolygonDrawing } from './polygon.mjs';
+    
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        ctx.canvas.addEventListener('click', (event) => {
+        console.log("Canvas clicado!");
+        });
+        startPolygonDrawing(ctx, canvas.width, canvas.height);
+    </script>
+    
+</body>
+</html>
