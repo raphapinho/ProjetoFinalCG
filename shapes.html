@@ -12,18 +12,25 @@
 
     <div id="controls">
         <div id="selected-coordinates">Pontos selecionados:</div>
-        <label>
-            <input type="radio" name="drawMode" value="line" checked> Desenhar Linha (Bresenham)
-        </label>
-        <label>
-            <input type="radio" name="drawMode" value="circle"> Desenhar Círculo
-        </label>
-        <label>
-            <input type="radio" name="drawMode" value="ellipse"> Desenhar Elipse
-        </label>
-        <label>
-            <input type="checkbox" id="filled" checked> Preencher
-        </label>
+        
+        <div class="controls">
+            <label>
+                <input type="radio" name="drawMode" value="line" checked>
+                <span>Desenhar Linha (Bresenham)</span>
+            </label>
+            <label>
+                <input type="radio" name="drawMode" value="circle">
+                <span>Desenhar Círculo</span>
+            </label>
+            <label>
+                <input type="radio" name="drawMode" value="ellipse">
+                <span>Desenhar Elipse</span>
+            </label>
+            <label>
+                <input type="checkbox" id="filled" checked>
+                <span>Preencher</span>
+            </label>
+        </div>
     </div>
 
     <script type="module">

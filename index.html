@@ -8,8 +8,9 @@
 </head>
 <body>
     <h1>Escolha uma opção</h1>
-    <button id="shapesButton">Desenhar Formas</button>
-    <button id="bezierButton">Desenhar Curvas de Bézier</button>
+    <button class="optionButton" id="shapesButton">Desenhar Formas</button>
+    <button class="optionButton" id="bezierButton">Desenhar Curvas de Bézier</button>
+    <button class="optionButton" id="polyButton">Desenhar Polilinhas</button>
 
     <script>
         document.getElementById('shapesButton').onclick = () => {
@@ -18,6 +19,10 @@
 
         document.getElementById('bezierButton').onclick = () => {
             window.location.href = 'bezier.html'; // Redireciona para a página de curvas de Bézier
+        };
+
+        document.getElementById('polyButton').onclick = () => {
+            window.location.href = 'poly.html'; // Redireciona para a página de polilinhas
         };
     </script>
 </body>
