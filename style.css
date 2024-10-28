@@ -1,31 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-.container {
-    margin: 20px auto;
-    width: 80%;
-}
-
-#grid-container {
-    display: grid;
-    margin-top: 20px;
-}
-
-.cell {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #333;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    background-color: white;
-}
-
-.cell.selected {
-    background-color: yellow; /* Cor ao selecionar */
-}
+  }
+  
+  #canvas {
+    border: 1px solid black;
+    cursor: crosshair;
+  }
+  
+  #controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  #selected-coordinates {
+    margin-bottom: 10px;
+  }  
