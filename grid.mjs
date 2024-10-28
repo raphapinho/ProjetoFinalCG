@@ -2,6 +2,7 @@
 import { drawLine } from './bresenham.mjs';
 import { drawCircle } from './circle.mjs';
 
+
 // Função para desenhar o plano cartesiano com grid
 export function drawCartesianPlane(ctx, width, height) {
   const centerX = width / 2;
@@ -43,11 +44,11 @@ export function drawCartesianPlane(ctx, width, height) {
   }
 }
 
-// Função para atualizar o grid com os pontos do círculo ou linha
-export function updateGrid(ctx, points) {
+// grid.mjs
+export function updateGrid(ctx, pixels) {
   ctx.fillStyle = 'blue';
 
-  points.forEach(([x, y]) => {
-    ctx.fillRect(x, y, 3, 3); // Desenha cada ponto do círculo ou linha
+  pixels.forEach(([x, y]) => {
+    ctx.fillRect(x, y, 2, 2); // Aumenta o tamanho do pixel para 2x2 para maior visibilidade
   });
 }

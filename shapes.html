@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenho de Formas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Desenhar Formas no Plano Cartesiano</h1>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <div id="controls">
+        <div id="selected-coordinates">Pontos selecionados:</div>
+        <label>
+            <input type="radio" name="drawMode" value="line" checked> Desenhar Linha (Bresenham)
+        </label>
+        <label>
+            <input type="radio" name="drawMode" value="circle"> Desenhar Círculo
+        </label>
+        <label>
+            <input type="radio" name="drawMode" value="ellipse"> Desenhar Elipse
+        </label>
+    </div>
+
+    <script type="module">
+        import { drawCartesianPlane } from './grid.mjs';
+        import { drawLine } from './bresenham.mjs';
+        import { drawCircle } from './circle.mjs';
+        import { drawEllipse } from './ellipse.mjs';
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const coordinatesDiv = document.getElementById('selected-coordinates');
+
+        let points = [];
+        let drawMode = 'line'; 
+
+        // Atualiza o modo de desenho com base na seleção do usuário
+        document.querySelectorAll('input[name="drawMode"]').forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                drawMode = event.target.value;
+            });
+        });
+
+        drawCartesianPlane(ctx, canvas.width, canvas.height);
+
+        // Evento de clique no canvas para capturar pontos e desenhar
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            points.push([x, y]);
+            coordinatesDiv.textContent = `Pontos selecionados: ${points.map(([px, py]) => `(${px}, ${py})`).join(', ')}`;
+
+            if (points.length === 2) {
+                const [x0, y0] = points[0];
+                const [x1, y1] = points[1];
+
+                let shapePoints = [];
+
+                if (drawMode === 'line') {
+                    shapePoints = drawLine(x0, y0, x1, y1);
+                } else if (drawMode === 'circle') {
+                    shapePoints = drawCircle(x0, y0, x1, y1, false); // Preenchido é falso para simplificação
+                } else if (drawMode === 'ellipse') {
+                    shapePoints = drawEllipse(x0, y0, x1, y1, false); // Preenchido é falso para simplificação
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawCartesianPlane(ctx, canvas.width, canvas.height);
+                updateGrid(ctx, shapePoints);
+
+                points = []; // Limpa os pontos após o desenho
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenho de Curvas de Bézier</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="bezier_grid.mjs"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Desenho de Curvas de Bézier</h1>
+        <canvas id="bezierCanvas" width="800" height="600"></canvas>
+        <div class="controls">
+            <button id="clearCanvas">Limpar Canvas</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { setupBezierDrawing, drawBezierGrid } from './bezier_grid.mjs';
+
+        const canvas = document.getElementById('bezierCanvas');
+        const ctx = canvas.getContext('2d');
+
+        setupBezierDrawing(canvas);
+    </script>
+</body>
+</html>
