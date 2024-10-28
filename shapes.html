@@ -21,10 +21,14 @@
         <label>
             <input type="radio" name="drawMode" value="ellipse"> Desenhar Elipse
         </label>
+        <label>
+            <input type="checkbox" id="filled" checked> Preencher
+        </label>
     </div>
 
     <script type="module">
         import { drawCartesianPlane } from './grid.mjs';
+        import { updateGrid } from './grid.mjs';
         import { drawLine } from './bresenham.mjs';
         import { drawCircle } from './circle.mjs';
         import { drawEllipse } from './ellipse.mjs';
@@ -45,34 +49,43 @@
 
         drawCartesianPlane(ctx, canvas.width, canvas.height);
 
+        let isFilled = true; // Por padrão, o círculo ou a elipse será preenchido
+
+        // Captura o estado do checkbox
+        const filledCheckbox = document.getElementById('filled');
+        filledCheckbox.addEventListener('change', (event) => {
+            isFilled = event.target.checked;
+        });
+
         // Evento de clique no canvas para capturar pontos e desenhar
         canvas.addEventListener('click', (event) => {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
-
+        
             points.push([x, y]);
             coordinatesDiv.textContent = `Pontos selecionados: ${points.map(([px, py]) => `(${px}, ${py})`).join(', ')}`;
-
+        
             if (points.length === 2) {
                 const [x0, y0] = points[0];
                 const [x1, y1] = points[1];
-
+        
                 let shapePoints = [];
-
+        
                 if (drawMode === 'line') {
                     shapePoints = drawLine(x0, y0, x1, y1);
                 } else if (drawMode === 'circle') {
-                    shapePoints = drawCircle(x0, y0, x1, y1, false); // Preenchido é falso para simplificação
+                    shapePoints = drawCircle(x0, y0, x1, y1, isFilled); // Passa o estado do preenchimento
                 } else if (drawMode === 'ellipse') {
-                    shapePoints = drawEllipse(x0, y0, x1, y1, false); // Preenchido é falso para simplificação
+                    shapePoints = drawEllipse(x0, y0, x1, y1, isFilled); // Passa o estado do preenchimento
                 }
-
+        
+                console.log(shapePoints);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawCartesianPlane(ctx, canvas.width, canvas.height);
                 updateGrid(ctx, shapePoints);
-
-                points = []; // Limpa os pontos após o desenho
+        
+                points = [];
             }
         });
     </script>
