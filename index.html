@@ -8,21 +8,36 @@
 </head>
 <body>
     <h1>Escolha uma opção</h1>
-    <button class="optionButton" id="shapesButton">Desenhar Formas</button>
+    <button class="optionButton" id="bresenhamButton">Desenhar Linha (Bresenham)</button>
+    <button class="optionButton" id="circleButton">Desenhar Círculo</button>
+    <button class="optionButton" id="ellipseButton">Desenhar Elipse</button>
     <button class="optionButton" id="bezierButton">Desenhar Curvas de Bézier</button>
     <button class="optionButton" id="polyButton">Desenhar Polilinhas</button>
+    <button class="optionButton" id="polygonButton">Preenchimento e varredura</button>
 
     <script>
-        document.getElementById('shapesButton').onclick = () => {
-            window.location.href = 'shapes.html'; // Redireciona para a página de formas
+        document.getElementById('bresenhamButton').onclick = () => {
+            window.location.href = 'bresenham.html';
+        };
+
+        document.getElementById('circleButton').onclick = () => {
+            window.location.href = 'circle.html';
+        };
+
+        document.getElementById('ellipseButton').onclick = () => {
+            window.location.href = 'ellipse.html';
         };
 
         document.getElementById('bezierButton').onclick = () => {
-            window.location.href = 'bezier.html'; // Redireciona para a página de curvas de Bézier
+            window.location.href = 'bezier.html';
         };
 
         document.getElementById('polyButton').onclick = () => {
-            window.location.href = 'poly.html'; // Redireciona para a página de polilinhas
+            window.location.href = 'poly.html';
+        };
+
+        document.getElementById('polygonButton').onclick = () => {
+            window.location.href = 'polygon.html';
         };
     </script>
 </body>

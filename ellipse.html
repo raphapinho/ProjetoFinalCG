@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenho de Elipse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Desenhar Elipse no Plano Cartesiano</h1>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <div id="controls">
+        <div id="selected-coordinates">Pontos selecionados:</div>
+        
+        <div class="controls">
+            <label>
+                <input type="radio" name="drawMode" value="ellipse" checked>
+                <span>Desenhar Elipse</span>
+            </label>
+            <label>
+                <input type="checkbox" id="filled" checked>
+                <span>Preencher</span>
+            </label>
+        </div>
+    </div>
+
+    <script type="module">
+        import { drawCartesianPlane } from './grid.mjs';
+        import { updateGrid } from './grid.mjs';
+        import { drawEllipse } from './ellipse.mjs';
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const coordinatesDiv = document.getElementById('selected-coordinates');
+
+        let points = [];
+        let isFilled = true; // Por padrão, a elipse será preenchida
+
+        drawCartesianPlane(ctx, canvas.width, canvas.height);
+
+        // Captura o estado do checkbox
+        const filledCheckbox = document.getElementById('filled');
+        filledCheckbox.addEventListener('change', (event) => {
+            isFilled = event.target.checked;
+        });
+
+        // Evento de clique no canvas para capturar pontos e desenhar
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+        
+            points.push([x, y]);
+            coordinatesDiv.textContent = `Pontos selecionados: ${points.map(([px, py]) => `(${px}, ${py})`).join(', ')}`;
+        
+            if (points.length === 2) {
+                const [x0, y0] = points[0];
+                const [x1, y1] = points[1];
+        
+                const shapePoints = drawEllipse(x0, y0, x1, y1, isFilled);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawCartesianPlane(ctx, canvas.width, canvas.height);
+                updateGrid(ctx, shapePoints);
+        
+                points = [];
+            }
+        });
+    </script>
+</body>
+</html>

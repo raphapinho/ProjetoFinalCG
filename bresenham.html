@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desenho de Formas</title>
+    <title>Desenho de Linha - Bresenham</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Desenhar Formas no Plano Cartesiano</h1>
+    <h1>Desenhar Linha no Plano Cartesiano</h1>
     <canvas id="canvas" width="800" height="600"></canvas>
 
     <div id="controls">
@@ -18,18 +18,6 @@
                 <input type="radio" name="drawMode" value="line" checked>
                 <span>Desenhar Linha (Bresenham)</span>
             </label>
-            <label>
-                <input type="radio" name="drawMode" value="circle">
-                <span>Desenhar Círculo</span>
-            </label>
-            <label>
-                <input type="radio" name="drawMode" value="ellipse">
-                <span>Desenhar Elipse</span>
-            </label>
-            <label>
-                <input type="checkbox" id="filled" checked>
-                <span>Preencher</span>
-            </label>
         </div>
     </div>
 
@@ -37,32 +25,14 @@
         import { drawCartesianPlane } from './grid.mjs';
         import { updateGrid } from './grid.mjs';
         import { drawLine } from './bresenham.mjs';
-        import { drawCircle } from './circle.mjs';
-        import { drawEllipse } from './ellipse.mjs';
 
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const coordinatesDiv = document.getElementById('selected-coordinates');
 
         let points = [];
-        let drawMode = 'line'; 
-
-        // Atualiza o modo de desenho com base na seleção do usuário
-        document.querySelectorAll('input[name="drawMode"]').forEach(radio => {
-            radio.addEventListener('change', (event) => {
-                drawMode = event.target.value;
-            });
-        });
 
         drawCartesianPlane(ctx, canvas.width, canvas.height);
-
-        let isFilled = true; // Por padrão, o círculo ou a elipse será preenchido
-
-        // Captura o estado do checkbox
-        const filledCheckbox = document.getElementById('filled');
-        filledCheckbox.addEventListener('change', (event) => {
-            isFilled = event.target.checked;
-        });
 
         // Evento de clique no canvas para capturar pontos e desenhar
         canvas.addEventListener('click', (event) => {
@@ -77,17 +47,7 @@
                 const [x0, y0] = points[0];
                 const [x1, y1] = points[1];
         
-                let shapePoints = [];
-        
-                if (drawMode === 'line') {
-                    shapePoints = drawLine(x0, y0, x1, y1);
-                } else if (drawMode === 'circle') {
-                    shapePoints = drawCircle(x0, y0, x1, y1, isFilled); // Passa o estado do preenchimento
-                } else if (drawMode === 'ellipse') {
-                    shapePoints = drawEllipse(x0, y0, x1, y1, isFilled); // Passa o estado do preenchimento
-                }
-        
-                console.log(shapePoints);
+                const shapePoints = drawLine(x0, y0, x1, y1);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawCartesianPlane(ctx, canvas.width, canvas.height);
                 updateGrid(ctx, shapePoints);
