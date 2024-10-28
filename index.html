@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plano Cartesiano com Desenho de Círculos e Linhas</title>
+  <title>Plano Cartesiano com Desenho de Formas</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-  <h1>Plano Cartesiano com Desenho de Círculos e Linhas</h1>
+  <h1>Plano Cartesiano com Desenho de Formas</h1>
   <canvas id="canvas" width="600" height="600"></canvas>
 
   <div id="controls">
@@ -35,6 +35,9 @@
     <label>
       <input type="radio" name="drawMode" value="circle"> Desenhar Círculo
     </label>
+    <label>
+      <input type="radio" name="drawMode" value="ellipse"> Desenhar Elipse
+    </label>
     <label id="filledOption" style="display: none;">
       <input type="checkbox" id="filled-checkbox"> Preenchido
     </label>
@@ -44,6 +47,7 @@
     import { drawCartesianPlane, updateGrid } from './grid.mjs';
     import { drawLine } from './bresenham.mjs';
     import { drawCircle } from './circle.mjs';
+    import { drawEllipse } from './ellipse.mjs';
 
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -58,7 +62,7 @@
     document.querySelectorAll('input[name="drawMode"]').forEach(radio => {
       radio.addEventListener('change', (event) => {
         drawMode = event.target.value;
-        filledOption.style.display = drawMode === 'circle' ? 'block' : 'none';
+        filledOption.style.display = (drawMode === 'circle' || drawMode === 'ellipse') ? 'block' : 'none';
       });
     });
 
@@ -76,7 +80,7 @@
         ? `Ponto 1: (${x}, ${y})`
         : `${coordinatesDiv.textContent}, Ponto 2: (${x}, ${y})`;
 
-      // Quando dois pontos são selecionados, desenha o círculo ou a linha
+      // Quando dois pontos são selecionados, desenha a forma com base no modo selecionado
       if (points.length === 2) {
         const [x0, y0] = points[0];
         const [x1, y1] = points[1];
@@ -84,12 +88,11 @@
         let shapePoints = [];
 
         if (drawMode === 'line') {
-          // Chama a função para desenhar uma linha com Bresenham
           shapePoints = drawLine(x0, y0, x1, y1);
         } else if (drawMode === 'circle') {
-          // Chama a função para desenhar um círculo
-          const filled = filledCheckbox.checked;
-          shapePoints = drawCircle(x0, y0, x1, y1, filled);
+          shapePoints = drawCircle(x0, y0, x1, y1, filledCheckbox.checked);
+        } else if (drawMode === 'ellipse') {
+          shapePoints = drawEllipse(x0, y0, x1, y1, filledCheckbox.checked);
         }
 
         // Redesenha o plano cartesiano e atualiza o grid com a forma desenhada
