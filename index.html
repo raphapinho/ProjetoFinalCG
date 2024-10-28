@@ -1,18 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Final - Computação Gráfica</title>
-    <link rel="stylesheet" href="./map/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plano Cartesiano com Desenho de Círculos e Linhas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #canvas {
+      border: 1px solid black;
+      cursor: crosshair;
+    }
+    #controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Escolha um Algoritmo</h1>
-        <button onclick="window.location.href='./src/sintese/sintese.html'">Síntese de Imagem</button>
-        <button onclick="window.location.href='./src/processamento/processamento.html'">Processamento de Imagem</button>
-    </div>
+  <h1>Plano Cartesiano com Desenho de Círculos e Linhas</h1>
+  <canvas id="canvas" width="600" height="600"></canvas>
+
+  <div id="controls">
+    <div id="selected-coordinates">Pontos selecionados: (x1, y1), (x2, y2)</div>
+    <label>
+      <input type="radio" name="drawMode" value="line" checked> Desenhar Linha (Bresenham)
+    </label>
+    <label>
+      <input type="radio" name="drawMode" value="circle"> Desenhar Círculo
+    </label>
+    <label id="filledOption" style="display: none;">
+      <input type="checkbox" id="filled-checkbox"> Preenchido
+    </label>
+  </div>
+
+  <script type="module">
+    import { drawCartesianPlane, updateGrid } from './grid.mjs';
+    import { drawLine } from './bresenham.mjs';
+    import { drawCircle } from './circle.mjs';
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const coordinatesDiv = document.getElementById('selected-coordinates');
+    const filledCheckbox = document.getElementById('filled-checkbox');
+    const filledOption = document.getElementById('filledOption');
+
+    let points = []; // Armazena pontos selecionados para desenho
+    let drawMode = 'line'; // Modo inicial de desenho
+
+    // Atualiza o modo de desenho com base na seleção do usuário
+    document.querySelectorAll('input[name="drawMode"]').forEach(radio => {
+      radio.addEventListener('change', (event) => {
+        drawMode = event.target.value;
+        filledOption.style.display = drawMode === 'circle' ? 'block' : 'none';
+      });
+    });
+
+    // Desenha o plano cartesiano inicial
+    drawCartesianPlane(ctx, canvas.width, canvas.height);
+
+    // Evento de clique no canvas para capturar pontos e desenhar
+    canvas.addEventListener('click', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      points.push([x, y]);
+      coordinatesDiv.textContent = points.length === 1 
+        ? `Ponto 1: (${x}, ${y})`
+        : `${coordinatesDiv.textContent}, Ponto 2: (${x}, ${y})`;
+
+      // Quando dois pontos são selecionados, desenha o círculo ou a linha
+      if (points.length === 2) {
+        const [x0, y0] = points[0];
+        const [x1, y1] = points[1];
+
+        let shapePoints = [];
+
+        if (drawMode === 'line') {
+          // Chama a função para desenhar uma linha com Bresenham
+          shapePoints = drawLine(x0, y0, x1, y1);
+        } else if (drawMode === 'circle') {
+          // Chama a função para desenhar um círculo
+          const filled = filledCheckbox.checked;
+          shapePoints = drawCircle(x0, y0, x1, y1, filled);
+        }
+
+        // Redesenha o plano cartesiano e atualiza o grid com a forma desenhada
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawCartesianPlane(ctx, canvas.width, canvas.height);
+        updateGrid(ctx, shapePoints);
+
+        points = []; // Limpa os pontos após o desenho
+      }
+    });
+  </script>
 </body>
 </html>
