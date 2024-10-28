@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Cubo com Translação, Rotação e Escala</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+    <div id="container" style="width: 100vw; height: 100vh;"></div>
+    <div style="position: fixed; top: 10px; left: 10px;">
+        <!-- Botões para translação -->
+        <h3>Transladar</h3>
+        <button onclick="transladar('x', 1)">Direita (X+)</button>
+        <button onclick="transladar('x', -1)">Esquerda (X-)</button><br>
+        <button onclick="transladar('y', 1)">Cima (Y+)</button>
+        <button onclick="transladar('y', -1)">Baixo (Y-)</button><br>
+        <button onclick="transladar('z', 1)">Frente (Z+)</button>
+        <button onclick="transladar('z', -1)">Trás (Z-)</button><br>
+
+        <!-- Botões para rotação -->
+        <h3>Rotacionar</h3>
+        <button onclick="rotacionar('x', Math.PI / 4)">Rotacionar X+</button>
+        <button onclick="rotacionar('x', -Math.PI / 4)">Rotacionar X-</button><br>
+        <button onclick="rotacionar('y', Math.PI / 4)">Rotacionar Y+</button>
+        <button onclick="rotacionar('y', -Math.PI / 4)">Rotacionar Y-</button><br>
+        <button onclick="rotacionar('z', Math.PI / 4)">Rotacionar Z+</button>
+        <button onclick="rotacionar('z', -Math.PI / 4)">Rotacionar Z-</button><br>
+
+        <!-- Botões para escala -->
+        <h3>Escalar</h3>
+        <button onclick="escalar('x', 1.2)">Escalar X+</button>
+        <button onclick="escalar('x', 0.8)">Escalar X-</button><br>
+        <button onclick="escalar('y', 1.2)">Escalar Y+</button>
+        <button onclick="escalar('y', 0.8)">Escalar Y-</button><br>
+        <button onclick="escalar('z', 1.2)">Escalar Z+</button>
+        <button onclick="escalar('z', 0.8)">Escalar Z-</button><br>
+    </div>
+
+    <script>
+        // Configuração básica da cena
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("container").appendChild(renderer.domElement);
+
+        // Criando o cubo
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        // Posição inicial da câmera
+        camera.position.z = 5;
+
+        // Função de translação
+        function transladar(eixo, valor) {
+            cube.position[eixo] += valor;
+        }
+
+        // Função de rotação para cada eixo
+        function rotacionar(eixo, angulo) {
+            cube.rotation[eixo] += angulo;
+        }
+
+        // Função de escala para cada eixo
+        function escalar(eixo, fator) {
+            cube.scale[eixo] *= fator;
+        }
+
+        // Função de animação
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+
+</html>
