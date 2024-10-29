@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,8 @@
     <button class="optionButton" id="bezierButton">Desenhar Curvas de Bézier</button>
     <button class="optionButton" id="polyButton">Desenhar Polilinhas</button>
     <button class="optionButton" id="polygonButton">Preenchimento e varredura</button>
+    <button class="optionButton" id="clipLineButton">Recorte de Reta</button>
+    <button class="optionButton" id="clipPolyButton">Recorte de Polígono</button>
 
     <script>
         document.getElementById('bresenhamButton').onclick = () => {
@@ -38,6 +40,14 @@
 
         document.getElementById('polygonButton').onclick = () => {
             window.location.href = 'polygon.html';
+        };
+
+        document.getElementById('clipLineButton').onclick = () => {
+            window.location.href = 'clip_line.html';
+        };
+
+        document.getElementById('clipPolyButton').onclick = () => {
+            window.location.href = 'clip_poly.html';
         };
     </script>
 </body>
