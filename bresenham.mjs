@@ -1,5 +1,3 @@
-// bresenham.mjs
-
 export function drawLine(x0, y0, x1, y1) {
   const pixels = [];
   let dx = Math.abs(x1 - x0);

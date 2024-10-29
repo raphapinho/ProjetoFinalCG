@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip Polygon</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Desenhar Polígono e Verificar Corte</h1>
+
+    <label for="pointsSelect">Escolha o número de pontos do polígono:</label>
+    <select id="pointsSelect">
+        <option value="3">3 Pontos</option>
+        <option value="4">4 Pontos</option>
+        <option value="5" selected>5 Pontos</option>
+    </select>
+
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <div id="resultMessage" style="text-align: center; font-size: 20px;"></div>
+    
+    <script type="module" src="clip_poly.mjs"></script>
+</body>
+</html>
