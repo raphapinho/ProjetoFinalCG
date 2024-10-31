@@ -1,6 +1,5 @@
 // bezier_grid.mjs
-import { drawCartesianPlane } from './grid.mjs';
-import { drawLine } from './bresenham.mjs';
+import { drawCartesianPlane } from '../../../src/grid.mjs';
 import Bezier from './bezier.mjs'; // Importe a classe Bezier
 
 let controlPoints = [];

@@ -1,7 +1,3 @@
-// poly_grid.mjs
-import { drawLine } from './bresenham.mjs';
-
-// Função para desenhar o plano cartesiano com grid
 export function drawCartesianPlane(ctx, width, height) {
   const centerX = width / 2;
   const centerY = height / 2;

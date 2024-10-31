@@ -1,4 +1,3 @@
-// poly.mjs
 import { drawCartesianPlane, drawPolyline } from './poly_grid.mjs';
 
 const canvas = document.getElementById('canvas');

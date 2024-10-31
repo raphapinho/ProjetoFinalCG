@@ -1,13 +1,11 @@
-// grid.mjs
-export function drawCartesianPlane(ctx, width, height) {
+export function drawCartesianPlane(ctx, width, height) { 
   const centerX = width / 2;
   const centerY = height / 2;
-  const scale = 20; // Tamanho do quadrado
+  const scale = 20;
 
-  // Limpa o canvas
   ctx.clearRect(0, 0, width, height);
-
-  // Desenha os eixos
+  
+  // Desenha eixos X e Y
   ctx.beginPath();
   ctx.moveTo(centerX, 0);
   ctx.lineTo(centerX, height);
@@ -17,17 +15,34 @@ export function drawCartesianPlane(ctx, width, height) {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Desenha a grade
-  ctx.strokeStyle = 'lightgray';
-  for (let i = -centerX; i <= centerX; i += scale) {
-      ctx.beginPath();
-      ctx.moveTo(centerX + i, 0);
-      ctx.lineTo(centerX + i, height);
-      ctx.stroke();
+  // Desenha a escala nos eixos X e Y
+  ctx.font = '12px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
 
-      ctx.beginPath();
-      ctx.moveTo(0, centerY + i);
-      ctx.lineTo(width, centerY + i);
-      ctx.stroke();
+  for (let i = -centerX; i <= centerX; i += scale) {
+    const xPos = centerX + i;
+    const yPos = centerY + i;
+
+    ctx.beginPath();
+    ctx.moveTo(xPos, centerY - 5);
+    ctx.lineTo(xPos, centerY + 5);
+    ctx.stroke();
+    if (i !== 0) ctx.fillText(i / scale, xPos, centerY + 15);
+
+    ctx.beginPath();
+    ctx.moveTo(centerX - 5, yPos);
+    ctx.lineTo(centerX + 5, yPos);
+    ctx.stroke();
+    if (i !== 0) ctx.fillText(-i / scale, centerX - 15, yPos);
   }
+}
+
+// grid.mjs
+export function updateGrid(ctx, pixels) {
+  ctx.fillStyle = 'blue';
+
+  pixels.forEach(([x, y]) => {
+    ctx.fillRect(x, y, 2, 2); // Aumenta o tamanho do pixel para 2x2 para maior visibilidade
+  });
 }

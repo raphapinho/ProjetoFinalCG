@@ -4,100 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desenho de Linha - Bresenham</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../src/style.css">
 </head>
 <body>
     <h1>Desenhar Linha no Plano Cartesiano</h1>
     <canvas id="canvas" width="800" height="600"></canvas>
+
     <div id="controls">
         <div id="selected-coordinates">Pontos selecionados:</div>
+        
+        <div class="controls">
+            <label>
+                <input type="radio" name="drawMode" value="line" checked>
+                <span>Desenhar Linha (Bresenham)</span>
+            </label>
+        </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { drawCartesianPlane } from '../../../src/grid.mjs';
+        import { updateGrid } from '../../../src/grid.mjs';
+        import { drawLine } from './bresenham.mjs';
+
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const coordinatesDiv = document.getElementById('selected-coordinates');
 
         let points = [];
 
-        // Função para desenhar o plano cartesiano
-        function drawCartesianPlane() {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const scale = 20;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Eixo Y
-            ctx.beginPath();
-            ctx.moveTo(centerX, 0);
-            ctx.lineTo(centerX, canvas.height);
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Eixo X
-            ctx.beginPath();
-            ctx.moveTo(0, centerY);
-            ctx.lineTo(canvas.width, centerY);
-            ctx.stroke();
-
-            // Desenha a grade
-            ctx.strokeStyle = 'lightgray';
-            for (let i = -centerX; i <= centerX; i += scale) {
-                ctx.beginPath();
-                ctx.moveTo(centerX + i, 0);
-                ctx.lineTo(centerX + i, canvas.height);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(0, centerY + i);
-                ctx.lineTo(canvas.width, centerY + i);
-                ctx.stroke();
-            }
-
-            // Adiciona os números nos eixos
-            ctx.fillStyle = 'black';
-            ctx.font = '12px Arial';
-            for (let i = -centerX; i <= centerX; i += scale) {
-                if (i !== 0) {
-                    ctx.fillText(i / scale, centerX + i, centerY + 15);
-                    ctx.fillText(-i / scale, centerX - 20, centerY + i);
-                }
-            }
-        }
+        drawCartesianPlane(ctx, canvas.width, canvas.height);
 
         // Função para desenhar um ponto no canvas
         function drawPoint(x, y) {
-            ctx.fillStyle = 'red'; 
+            ctx.fillStyle = 'red'; // Cor do ponto
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.arc(x, y, 5, 0, Math.PI * 2); // Círculo com raio 5
             ctx.fill();
         }
 
-        // Desenha o plano cartesiano ao carregar
-        drawCartesianPlane();
+        // Função para desenhar todos os pontos armazenados
+        function drawStoredPoints() {
+            points.forEach(([x, y]) => drawPoint(x, y));
+        }
 
-        // Evento de clique no canvas para capturar pontos
+        // Limpa o canvas e redesenha o plano cartesiano
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCartesianPlane(ctx, canvas.width, canvas.height);
+        }
+
+        // Evento de clique no canvas para capturar pontos e desenhar
         canvas.addEventListener('click', (event) => {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
 
+            // Adiciona o ponto ao array de pontos
             points.push([x, y]);
             coordinatesDiv.textContent = `Pontos selecionados: ${points.map(([px, py]) => `(${px}, ${py})`).join(', ')}`;
+            
+            drawPoint(x, y); // Desenha o ponto clicado
 
-            drawPoint(x, y); 
+            // Lógica para desenhar linha
+            if (points.length === 2) {
+                const [x0, y0] = points[0];
+                const [x1, y1] = points[1];
 
-            // Limpa os pontos e o plano após o terceiro clique
+                const shapePoints = drawLine(x0, y0, x1, y1);
+                updateGrid(ctx, shapePoints);
+                drawStoredPoints(); // Desenha os pontos armazenados
+            }
+
+            // Limpa os pontos e a linha após o terceiro clique
             if (points.length === 3) {
-                points = []; 
-                coordinatesDiv.textContent = 'Pontos selecionados:'; 
-                drawCartesianPlane(); 
+                clearCanvas();
+                points = []; // Reinicia os pontos
+                coordinatesDiv.textContent = 'Pontos selecionados:'; // Limpa a exibição
             }
         });
     </script>
