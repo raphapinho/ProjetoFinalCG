@@ -19,6 +19,7 @@
     <button class="optionButton" id="escale">Transformação de escala</button>
     <button class="optionButton" id="rotation">Transformação de rotação</button>
     <button class="optionButton" id="translation">Transformação de translação</button>
+    <button class="optionButton" id="projection">Criar Projeção</button>
 
     <script>
         document.getElementById('bresenhamButton').onclick = () => {
@@ -64,6 +65,10 @@
 
         document.getElementById('translation').onclick = () => {
             window.location.href = '../synth/transform/translation/trans_poly.html';
+        };
+
+        document.getElementById('projection').onclick = () => {
+            window.location.href = '../synth/projection/proj_poly.html';
         };
     </script>
 </body>
