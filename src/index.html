@@ -16,6 +16,9 @@
     <button class="optionButton" id="polygonButton">Preenchimento e varredura</button>
     <button class="optionButton" id="clipLineButton">Recorte de Reta</button>
     <button class="optionButton" id="clipPolyButton">Recorte de Polígono</button>
+    <button class="optionButton" id="escale">Transformação de escala</button>
+    <button class="optionButton" id="rotation">Transformação de rotação</button>
+    <button class="optionButton" id="translation">Transformação de translação</button>
 
     <script>
         document.getElementById('bresenhamButton').onclick = () => {
@@ -48,6 +51,19 @@
 
         document.getElementById('clipPolyButton').onclick = () => {
             window.location.href = '../synth/clipping/polygon/clip_poly.html';
+        };
+
+        document.getElementById('escale').onclick = () => {
+            window.location.href = '../synth/transform/escale/esc_poly.html';
+        };
+
+
+        document.getElementById('rotation').onclick = () => {
+            window.location.href = '../synth/transform/rotation/rot_poly.html';
+        };
+
+        document.getElementById('translation').onclick = () => {
+            window.location.href = '../synth/transform/translation/trans_poly.html';
         };
     </script>
 </body>
