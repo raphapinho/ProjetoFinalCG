@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../src/style.css">
+    <title>Detecção de Bordas</title>
+</head>
+<body>
+    <h1>Detecção de Bordas</h1>
+    <input type="file" id="upload" accept="image/*" />
+    <canvas id="canvas"></canvas>
+    
+    <h3>Escolha o algoritmo:</h3>
+    <button id="sobelBtn">Sobel</button>
+    <button id="prewittBtn">Prewitt</button>
+    <button id="cannyBtn">Canny</button>
+
+    <script type="module">
+        import { loadImage, applyAlgorithm } from './edgeDetectionFlow.mjs';
+
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        upload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                loadImage(canvas, ctx, file);
+            }
+        });
+
+        document.getElementById('sobelBtn').addEventListener('click', () => {
+            applyAlgorithm(canvas, ctx, 'sobel');
+        });
+
+        document.getElementById('prewittBtn').addEventListener('click', () => {
+            applyAlgorithm(canvas, ctx, 'prewitt');
+        });
+
+        document.getElementById('cannyBtn').addEventListener('click', () => {
+            applyAlgorithm(canvas, ctx, 'canny');
+        });
+    </script>
+</body>
+</html>

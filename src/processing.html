@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha uma Opção</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Escolha uma opção</h1>
+    <div class="button-container">
+        <button class="optionButton" id="convertButton">Conversão entre tipos de imagem</button>
+        <button class="optionButton" id="remnoiseButton">Remoção de ruídos</button>
+        <button class="optionButton" id="edgeButton">Destaque de bordas</button>
+    </div>
+
+    <script>
+        document.getElementById('convertButton').onclick = () => {
+            window.location.href = '../proc/conv/flow.html';
+        };
+
+        document.getElementById('remnoiseButton').onclick = () => {
+            window.location.href = '../proc/noise/noiseRemovalFlow.html';
+        };
+
+        document.getElementById('edgeButton').onclick = () => {
+            window.location.href = '../proc/edge/edgeDetectionFlow.html';
+        };
+    </script>
+</body>
+</html>

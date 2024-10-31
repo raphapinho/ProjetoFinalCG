@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../src/style.css">
+    <title>Detecção de Bordas com Canny</title>
+</head>
+<body>
+    <h1>Detecção de Bordas com Canny</h1>
+    <input type="file" id="upload" accept="image/*" />
+    <canvas id="canvas"></canvas>
+    <button id="processBtn">Aplicar Canny</button>
+    <button id="saveBtn">Salvar Imagem</button>
+    
+    <script type="module">
+        import { processImage } from './cannyEdgeDetection.mjs';
+
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        upload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const img = new Image();
+                img.onload = () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                };
+                img.src = URL.createObjectURL(file);
+            }
+        });
+
+        document.getElementById('processBtn').addEventListener('click', () => {
+            processImage(canvas, ctx);
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'canny_image.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+</html>

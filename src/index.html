@@ -1,74 +1,25 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escolha uma Opção</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styletwo.css">
 </head>
 <body>
     <h1>Escolha uma opção</h1>
-    <button class="optionButton" id="bresenhamButton">Desenhar Linha (Bresenham)</button>
-    <button class="optionButton" id="circleButton">Desenhar Círculo</button>
-    <button class="optionButton" id="ellipseButton">Desenhar Elipse</button>
-    <button class="optionButton" id="bezierButton">Desenhar Curvas de Bézier</button>
-    <button class="optionButton" id="polyButton">Desenhar Polilinhas</button>
-    <button class="optionButton" id="polygonButton">Preenchimento e varredura</button>
-    <button class="optionButton" id="clipLineButton">Recorte de Reta</button>
-    <button class="optionButton" id="clipPolyButton">Recorte de Polígono</button>
-    <button class="optionButton" id="escale">Transformação de escala</button>
-    <button class="optionButton" id="rotation">Transformação de rotação</button>
-    <button class="optionButton" id="translation">Transformação de translação</button>
-    <button class="optionButton" id="projection">Criar Projeção</button>
+    <div class="button-container">
+        <button class="optionButton" id="sythesisButton">Algoritmos de síntese de imagem</button>
+        <button class="optionButton" id="procesButton">Algoritmos de processamento de imagem</button>
+    </div>
 
     <script>
-        document.getElementById('bresenhamButton').onclick = () => {
-            window.location.href = '../synth/lines/bresenham/bresenham.html';
+        document.getElementById('sythesisButton').onclick = () => {
+            window.location.href = './synthesis.html';
         };
 
-        document.getElementById('circleButton').onclick = () => {
-            window.location.href = '../synth/shapes/circle/circle.html';
-        };
-
-        document.getElementById('ellipseButton').onclick = () => {
-            window.location.href = '.../synth/shapes/ellipse/ellipse.html';
-        };
-
-        document.getElementById('bezierButton').onclick = () => {
-            window.location.href = '../synth/lines/bezier/bezier.html';
-        };
-
-        document.getElementById('polyButton').onclick = () => {
-            window.location.href = '../synth/lines/poly/poly.html';
-        };
-
-        document.getElementById('polygonButton').onclick = () => {
-            window.location.href = '../synth/shapes/fill/polygon.html';
-        };
-
-        document.getElementById('clipLineButton').onclick = () => {
-            window.location.href = '../synth/clipping/line/clip_line.html';
-        };
-
-        document.getElementById('clipPolyButton').onclick = () => {
-            window.location.href = '../synth/clipping/polygon/clip_poly.html';
-        };
-
-        document.getElementById('escale').onclick = () => {
-            window.location.href = '../synth/transform/escale/esc_poly.html';
-        };
-
-
-        document.getElementById('rotation').onclick = () => {
-            window.location.href = '../synth/transform/rotation/rot_poly.html';
-        };
-
-        document.getElementById('translation').onclick = () => {
-            window.location.href = '../synth/transform/translation/trans_poly.html';
-        };
-
-        document.getElementById('projection').onclick = () => {
-            window.location.href = '../synth/projection/proj_poly.html';
+        document.getElementById('procesButton').onclick = () => {
+            window.location.href = './processing.html';
         };
     </script>
 </body>

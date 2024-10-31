@@ -2,7 +2,13 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 canvas {
@@ -39,6 +45,8 @@ canvas {
 }
 
 h1 {
+  color: #333;
+  font-size: 24px;
   text-align: center;
 }
 
@@ -59,29 +67,8 @@ button:hover {
   transform: translateY(-2px);
 }
 
-.button-container {
-  display: flex;
-  flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte se não houver espaço */
-  justify-content: center; /* Centraliza os botões */
-  gap: 10px; /* Espaço entre os botões */
-}
-
 .optionButton {
-  flex: 1 1 calc(30% - 10px); /* Cada botão ocupará 30% da largura, menos um espaço de 10px */
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s, transform 0.2s;
-  min-width: 150px; /* Garantir que os botões não fiquem muito pequenos */
-}
-
-.optionButton:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
+  margin: 10px 0;
 }
 
 label {

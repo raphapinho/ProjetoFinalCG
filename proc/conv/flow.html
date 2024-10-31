@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../src/style.css">
+  <title>Fluxo de Conversão de Imagem</title>
+</head>
+<body>
+  <h1>Fluxo de Conversão de Imagem</h1>
+  <input type="file" id="upload" accept="image/*" />
+  <canvas id="canvas"></canvas>
+  <button id="toGrayBtn">Converter para Tons de Cinza</button>
+  <button id="toBinaryBtn">Converter para Binário</button>
+  <button id="toGrayFromBinaryBtn">Converter de Binário para Tons de Cinza</button>
+  <button id="toRGBBtn">Converter para RGB</button>
+  
+  <script type="module">
+    import { initializeFlow } from './flow.mjs';
+
+    const upload = document.getElementById('upload');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    initializeFlow(upload, canvas, ctx);
+  </script>
+</body>
+</html>

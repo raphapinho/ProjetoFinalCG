@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../src/style.css">
+    <title>Remoção de Ruído - Filtro de Mediana</title>
+</head>
+<body>
+    <h1>Remoção de Ruído - Filtro de Mediana</h1>
+    <input type="file" id="upload" accept="image/*" />
+    <canvas id="canvas"></canvas>
+    <button id="applyBtn">Aplicar Filtro de Mediana</button>
+
+    <script type="module">
+        import { processImage } from './medianFilter.mjs';
+
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        upload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const img = new Image();
+                img.onload = () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                };
+                img.src = URL.createObjectURL(file);
+            }
+        });
+
+        document.getElementById('applyBtn').addEventListener('click', () => {
+            processImage(canvas, ctx);
+        });
+    </script>
+</body>
+</html>

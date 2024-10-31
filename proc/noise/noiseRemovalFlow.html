@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../src/style.css">
+    <title>Remoção de Ruído - Escolher Filtro</title>
+</head>
+<body>
+    <h1>Remoção de Ruído - Escolher Filtro</h1>
+    <input type="file" id="upload" accept="image/*" />
+    <select id="filterSelect">
+        <option value="mean">Filtro de Média</option>
+        <option value="median">Filtro de Mediana</option>
+        <option value="gaussian">Filtro Gaussiano</option>
+    </select>
+    <button id="applyBtn">Aplicar Filtro</button>
+    <canvas id="canvas"></canvas>
+
+    <script type="module">
+        import { setupNoiseRemoval } from './noiseRemovalFlow.mjs';
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        setupNoiseRemoval(canvas, ctx);
+    </script>
+</body>
+</html>
