@@ -1,5 +1,5 @@
 // polygon_grid.mjs
-import { drawCartesianPlane } from './grid.mjs';
+import { drawCartesianPlane } from '../../../src/grid.mjs';
 
 let points = [];
 let numPoints = 0; // Mover a variável para o escopo global

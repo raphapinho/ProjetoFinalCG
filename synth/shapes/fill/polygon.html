@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../src/style.css">
     <title>Desenho de Polígono</title>
-    <script type="module" src="polygon.mjs"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Desenho de Polígono</h1>
     <canvas id="canvas" width="600" height="600" style="border:1px solid black;"></canvas>
     <script type="module">
         import { startPolygonDrawing } from './polygon.mjs';
-    
+        
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         
         ctx.canvas.addEventListener('click', (event) => {
-        console.log("Canvas clicado!");
+            console.log("Canvas clicado!");
         });
         startPolygonDrawing(ctx, canvas.width, canvas.height);
     </script>
-    
+    <script type="module" src="./polygon.mjs"></script>    
 </body>
 </html>
