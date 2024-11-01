@@ -38,52 +38,45 @@
 
         drawCartesianPlane(ctx, canvas.width, canvas.height);
 
-        // Função para desenhar um ponto no canvas
         function drawPoint(x, y) {
-            ctx.fillStyle = 'red'; // Cor do ponto
+            ctx.fillStyle = 'red';
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2); // Círculo com raio 5
+            ctx.arc(x, y, 5, 0, Math.PI * 2);
             ctx.fill();
         }
 
-        // Função para desenhar todos os pontos armazenados
         function drawStoredPoints() {
             points.forEach(([x, y]) => drawPoint(x, y));
         }
 
-        // Limpa o canvas e redesenha o plano cartesiano
         function clearCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawCartesianPlane(ctx, canvas.width, canvas.height);
         }
 
-        // Evento de clique no canvas para capturar pontos e desenhar
         canvas.addEventListener('click', (event) => {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
 
-            // Adiciona o ponto ao array de pontos
             points.push([x, y]);
             coordinatesDiv.textContent = `Pontos selecionados: ${points.map(([px, py]) => `(${px}, ${py})`).join(', ')}`;
             
-            drawPoint(x, y); // Desenha o ponto clicado
+            drawPoint(x, y);
 
-            // Lógica para desenhar linha
             if (points.length === 2) {
                 const [x0, y0] = points[0];
                 const [x1, y1] = points[1];
 
                 const shapePoints = drawLine(x0, y0, x1, y1);
                 updateGrid(ctx, shapePoints);
-                drawStoredPoints(); // Desenha os pontos armazenados
+                drawStoredPoints();
             }
 
-            // Limpa os pontos e a linha após o terceiro clique
             if (points.length === 3) {
                 clearCanvas();
-                points = []; // Reinicia os pontos
-                coordinatesDiv.textContent = 'Pontos selecionados:'; // Limpa a exibição
+                points = [];
+                coordinatesDiv.textContent = 'Pontos selecionados:';
             }
         });
     </script>

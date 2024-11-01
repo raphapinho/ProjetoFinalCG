@@ -39,17 +39,15 @@
         const coordinatesDiv = document.getElementById('selected-coordinates');
 
         let points = [];
-        let isFilled = true; // Por padrão, a elipse será preenchida
+        let isFilled = true;
 
         drawCartesianPlane(ctx, canvas.width, canvas.height);
 
-        // Captura o estado do checkbox
         const filledCheckbox = document.getElementById('filled');
         filledCheckbox.addEventListener('change', (event) => {
             isFilled = event.target.checked;
         });
 
-        // Evento de clique no canvas para capturar pontos e desenhar
         canvas.addEventListener('click', (event) => {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;

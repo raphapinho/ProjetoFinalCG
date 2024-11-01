@@ -17,7 +17,6 @@ function applyMedianFilter(imageData) {
             const gValues = [];
             const bValues = [];
 
-            // Apply median filter
             for (let ky = -halfKernel; ky <= halfKernel; ky++) {
                 for (let kx = -halfKernel; kx <= halfKernel; kx++) {
                     const nx = x + kx;
@@ -35,7 +34,7 @@ function applyMedianFilter(imageData) {
             result[idx] = median(rValues);
             result[idx + 1] = median(gValues);
             result[idx + 2] = median(bValues);
-            result[idx + 3] = 255; // Alpha
+            result[idx + 3] = 255;
         }
     }
 

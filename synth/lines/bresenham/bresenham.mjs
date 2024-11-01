@@ -11,7 +11,7 @@ export function drawLine(x0, y0, x1, y1) {
   let err = dx - dy;
 
   while (true) {
-    pixels.push([x0, y0]);  // Adiciona o ponto atual à lista de pixels
+    pixels.push([x0, y0]);
 
     if (x0 === x1 && y0 === y1) break;
     const e2 = 2 * err;

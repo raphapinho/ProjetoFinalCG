@@ -5,10 +5,10 @@
 import { drawCartesianPlane } from '../../../src/grid.mjs';
 
 let points = [];
-let numPoints = 0; // Mover a variável para o escopo global
+let numPoints = 0;
 
 export function drawPolygon(ctx, width, height) {
-  points = []; // Reinicia os pontos a cada novo desenho
+  points = [];
   drawCartesianPlane(ctx, width, height);
 
   ctx.canvas.addEventListener('click', (event) => {
@@ -20,7 +20,6 @@ export function drawPolygon(ctx, width, height) {
       points.push({ x, y });
       drawPoint(ctx, x, y);
 
-      // Se o número de pontos atinge o máximo, desenha o polígono
       if (points.length === numPoints) {
         drawPolygonShape(ctx, points);
       }
@@ -36,7 +35,7 @@ function drawPoint(ctx, x, y) {
 }
 
 function drawPolygonShape(ctx, points) {
-  ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Cor do polígono
+  ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
   ctx.beginPath();
   ctx.moveTo(points[0].x, points[0].y);
 
@@ -44,13 +43,12 @@ function drawPolygonShape(ctx, points) {
     ctx.lineTo(points[i].x, points[i].y);
   }
 
-  ctx.closePath(); // Fecha o polígono
-  ctx.fill(); // Preenche o polígono
+  ctx.closePath();
+  ctx.fill();
   ctx.strokeStyle = 'black';
-  ctx.stroke(); // Desenha a borda do polígono
+  ctx.stroke();
 }
 
-// Função para iniciar o processo de desenho do polígono
 export function startPolygonDrawing(ctx, width, height) {
   numPoints = parseInt(prompt("Quantos pontos deseja para o polígono?"), 10);
 

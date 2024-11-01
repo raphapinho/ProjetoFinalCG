@@ -1,6 +1,6 @@
-// Discentes
+<!-- Discentes 
 //    Raphael Freitas Drago Pinho - 202004940023
-//    Thiago Correa de Castro - 202004940005
+//    Thiago Correa de Castro - 202004940005 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,6 @@
           const imageData = ctx.getImageData(0, 0, img.width, img.height);
           const data = imageData.data;
 
-          // Converter cada pixel para tons de cinza e depois para binário
           for (let i = 0; i < data.length; i += 4) {
             const r = data[i];
             const g = data[i + 1];
@@ -42,7 +41,6 @@
             const gray = rgbToGrayscale(r, g, b).r;
             const binary = grayscaleToBinary(gray);
 
-            // Definir o pixel como preto ou branco
             data[i] = data[i + 1] = data[i + 2] = binary;
           }
 

@@ -29,7 +29,7 @@ export function initializeFlow(upload, canvas, ctx) {
   document.getElementById('toGrayBtn').addEventListener('click', () => {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
-    grayMap = []; // Limpa o mapa de tons de cinza ao converter novamente
+    grayMap = [];
 
     for (let i = 0; i < data.length; i += 4) {
       const r = data[i];
@@ -37,8 +37,8 @@ export function initializeFlow(upload, canvas, ctx) {
       const b = data[i + 2];
       const gray = rgbToGrayscale(r, g, b).r;
 
-      data[i] = data[i + 1] = data[i + 2] = gray; // Setar como tons de cinza
-      grayMap.push(gray); // Armazena os tons de cinza
+      data[i] = data[i + 1] = data[i + 2] = gray;
+      grayMap.push(gray);
     }
 
     ctx.putImageData(imageData, 0, 0);
@@ -49,9 +49,9 @@ export function initializeFlow(upload, canvas, ctx) {
     const data = imageData.data;
 
     for (let i = 0; i < data.length; i += 4) {
-      const gray = data[i]; // Assumindo que R = G = B para tons de cinza
+      const gray = data[i];
       const binary = grayscaleToBinary(gray);
-      data[i] = data[i + 1] = data[i + 2] = binary; // Setar como binário
+      data[i] = data[i + 1] = data[i + 2] = binary;
     }
 
     ctx.putImageData(imageData, 0, 0);
@@ -62,10 +62,9 @@ export function initializeFlow(upload, canvas, ctx) {
     const data = imageData.data;
 
     for (let i = 0; i < data.length; i += 4) {
-      const binary = data[i]; // Assumindo que o valor binário está em R
-      // O valor binário deve ser mapeado para tons de cinza
-      const gray = binary === 0 ? 0 : 255; // Convertendo binário para tons de cinza (0 ou 255)
-      data[i] = data[i + 1] = data[i + 2] = gray; // Setar como tons de cinza
+      const binary = data[i];
+      const gray = binary === 0 ? 0 : 255;
+      data[i] = data[i + 1] = data[i + 2] = gray;
     }
 
     ctx.putImageData(imageData, 0, 0);
@@ -81,12 +80,12 @@ export function initializeFlow(upload, canvas, ctx) {
     const data = imageData.data;
 
     for (let i = 0; i < data.length; i += 4) {
-      const gray = data[i]; // Assumindo que R = G = B para tons de cinza
+      const gray = data[i];
       const rgb = grayscaleToRGB(gray);
       
-      data[i] = rgbMap[i];     // R
-      data[i + 1] = rgbMap[i + 1]; // G
-      data[i + 2] = rgbMap[i + 2]; // B
+      data[i] = rgbMap[i];
+      data[i + 1] = rgbMap[i + 1];
+      data[i + 2] = rgbMap[i + 2];
     }
 
     ctx.putImageData(imageData, 0, 0);

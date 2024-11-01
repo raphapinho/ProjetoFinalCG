@@ -9,7 +9,6 @@ export function drawCartesianPlane(ctx, width, height) {
 
   ctx.clearRect(0, 0, width, height);
   
-  // Desenha eixos X e Y
   ctx.beginPath();
   ctx.moveTo(centerX, 0);
   ctx.lineTo(centerX, height);
@@ -19,7 +18,6 @@ export function drawCartesianPlane(ctx, width, height) {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Desenha a escala nos eixos X e Y
   ctx.font = '12px Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -42,11 +40,10 @@ export function drawCartesianPlane(ctx, width, height) {
   }
 }
 
-// grid.mjs
 export function updateGrid(ctx, pixels) {
   ctx.fillStyle = 'blue';
 
   pixels.forEach(([x, y]) => {
-    ctx.fillRect(x, y, 2, 2); // Aumenta o tamanho do pixel para 2x2 para maior visibilidade
+    ctx.fillRect(x, y, 2, 2);
   });
 }

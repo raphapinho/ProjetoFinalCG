@@ -1,4 +1,6 @@
-// noiseRemovalFlow.mjs
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
 
 import { processImage as processMedian } from './medianFilter.mjs';
 import { processImage as processMean } from './meanFilter.mjs';
@@ -26,7 +28,7 @@ export function setupNoiseRemoval(canvas, ctx) {
 
     applyBtn.addEventListener('click', () => {
         if (originalImageData) {
-            ctx.putImageData(originalImageData, 0, 0); // Restore the original image
+            ctx.putImageData(originalImageData, 0, 0);
             const selectedFilter = filterSelect.value;
 
             switch (selectedFilter) {

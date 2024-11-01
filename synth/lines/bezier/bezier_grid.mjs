@@ -7,7 +7,6 @@ import Bezier from './bezier.mjs'; // Importe a classe Bezier
 
 let controlPoints = [];
 
-// Função para desenhar os pontos de controle
 function drawControlPoints(ctx) {
     ctx.fillStyle = 'red';
     controlPoints.forEach(point => {
@@ -17,7 +16,6 @@ function drawControlPoints(ctx) {
     });
 }
 
-// Função para desenhar a curva de Bézier
 function drawBezierCurve(ctx, bezier, steps = 100) {
     const points = bezier.getCurvePoints(steps);
     ctx.strokeStyle = 'blue';
@@ -37,7 +35,7 @@ export function drawBezierGrid(ctx, width, height) {
         const bezier = new Bezier(...controlPoints.flatMap(p => [p.x, p.y]));
         drawBezierCurve(ctx, bezier);
     }
-    drawControlPoints(ctx); // Desenhar pontos de controle
+    drawControlPoints(ctx);
 }
 
 export function setupBezierDrawing(canvas) {
@@ -52,7 +50,6 @@ export function setupBezierDrawing(canvas) {
         drawBezierGrid(ctx, canvas.width, canvas.height);
     });
 
-    // Limpar pontos de controle ao clicar no botão
     document.getElementById('clearCanvas').addEventListener('click', () => {
         controlPoints = [];
         ctx.clearRect(0, 0, canvas.width, canvas.height);

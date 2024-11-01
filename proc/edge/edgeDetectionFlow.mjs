@@ -21,7 +21,7 @@ export function loadImage(canvas, ctx, file) {
 
 export function applyAlgorithm(canvas, ctx, algorithm) {
     if (originalImageData) {
-        ctx.putImageData(originalImageData, 0, 0); // Restore original image
+        ctx.putImageData(originalImageData, 0, 0);
     }
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     

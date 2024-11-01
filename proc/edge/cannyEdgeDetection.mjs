@@ -12,7 +12,7 @@ function gaussianBlur(imageData) {
         [1, 2, 1]
     ];
     const kernelSize = 3;
-    const kernelSum = 16; // Total sum of kernel values
+    const kernelSum = 16;
     const result = new Uint8ClampedArray(data.length);
 
     for (let y = 1; y < height - 1; y++) {
@@ -32,7 +32,7 @@ function gaussianBlur(imageData) {
             result[idx] = r / kernelSum;
             result[idx + 1] = g / kernelSum;
             result[idx + 2] = b / kernelSum;
-            result[idx + 3] = 255; // Alpha
+            result[idx + 3] = 255;
         }
     }
 
@@ -46,7 +46,6 @@ function applyCanny(imageData) {
     const data = blurredData.data;
     const result = new Uint8ClampedArray(data.length);
 
-    // Sobel kernels for gradient computation
     const Gx = [
         [-1, 0, 1],
         [-2, 0, 2],
@@ -67,18 +66,17 @@ function applyCanny(imageData) {
             let pixelX = 0;
             let pixelY = 0;
 
-            // Apply Sobel operator
             for (let ky = -1; ky <= 1; ky++) {
                 for (let kx = -1; kx <= 1; kx++) {
                     const idx = ((y + ky) * width + (x + kx)) * 4;
-                    const grayValue = (data[idx] + data[idx + 1] + data[idx + 2]) / 3; // Convert RGB to grayscale
+                    const grayValue = (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
                     pixelX += Gx[ky + 1][kx + 1] * grayValue;
                     pixelY += Gy[ky + 1][kx + 1] * grayValue;
                 }
             }
 
             const mag = Math.sqrt(pixelX * pixelX + pixelY * pixelY);
-            const dir = Math.atan2(pixelY, pixelX) * (180 / Math.PI) + 180; // Angle in degrees
+            const dir = Math.atan2(pixelY, pixelX) * (180 / Math.PI) + 180;
 
             const idx = (y * width + x);
             magnitude[idx] = mag;
@@ -86,7 +84,6 @@ function applyCanny(imageData) {
         }
     }
 
-    // Non-maximum suppression
     for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
             const idx = (y * width + x);
@@ -107,7 +104,6 @@ function applyCanny(imageData) {
         }
     }
 
-    // Thresholding
     const highThreshold = 0.3 * 255;
     const lowThreshold = 0.1 * 255;
 
@@ -115,14 +111,14 @@ function applyCanny(imageData) {
         for (let x = 0; x < width; x++) {
             const idx = (y * width + x);
             if (magnitude[idx] >= highThreshold) {
-                result[idx * 4] = result[idx * 4 + 1] = result[idx * 4 + 2] = 255; // White
-                result[idx * 4 + 3] = 255; // Alpha
+                result[idx * 4] = result[idx * 4 + 1] = result[idx * 4 + 2] = 255;
+                result[idx * 4 + 3] = 255;
             } else if (magnitude[idx] >= lowThreshold) {
-                result[idx * 4] = result[idx * 4 + 1] = result[idx * 4 + 2] = 128; // Gray
-                result[idx * 4 + 3] = 255; // Alpha
+                result[idx * 4] = result[idx * 4 + 1] = result[idx * 4 + 2] = 128;
+                result[idx * 4 + 3] = 255;
             } else {
-                result[idx * 4] = result[idx * 4 + 1] = result[idx * 4 + 2] = 0; // Black
-                result[idx * 4 + 3] = 255; // Alpha
+                result[idx * 4] = result[idx * 4 + 1] = result[idx * 4 + 2] = 0;
+                result[idx * 4 + 3] = 255;
             }
         }
     }

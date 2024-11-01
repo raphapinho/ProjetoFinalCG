@@ -35,15 +35,13 @@
           const imageData = ctx.getImageData(0, 0, img.width, img.height);
           const data = imageData.data;
 
-          // Converter cada pixel de tons de cinza de volta para RGB
           for (let i = 0; i < data.length; i += 4) {
-            const gray = data[i]; // Supondo que o valor de cinza está em R (ou G ou B)
+            const gray = data[i];
             const rgb = grayscaleToRGB(gray);
 
-            // Definir o pixel como RGB
-            data[i] = rgb.r;     // R
-            data[i + 1] = rgb.g; // G
-            data[i + 2] = rgb.b; // B
+            data[i] = rgb.r;
+            data[i + 1] = rgb.g;
+            data[i + 2] = rgb.b;
           }
 
           ctx.putImageData(imageData, 0, 0);
@@ -55,8 +53,8 @@
     saveBtn.addEventListener('click', () => {
       const link = document.createElement('a');
       link.download = 'imagem_rgb.png';
-      link.href = canvas.toDataURL(); // Converte o canvas para URL de imagem
-      link.click(); // Inicia o download
+      link.href = canvas.toDataURL();
+      link.click();
     });
   </script>
 </body>

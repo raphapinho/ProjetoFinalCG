@@ -10,11 +10,10 @@ export function createCanvas() {
     return canvas.getContext('2d');
 }
 
-// Função para desenhar um polígono
 export function drawPolygon(ctx, vertices) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Limpa o canvas
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    if (vertices.length < 3) return; // Verifica se há vértices suficientes para desenhar um polígono
+    if (vertices.length < 3) return;
 
     ctx.beginPath();
     ctx.moveTo(vertices[0].x, vertices[0].y);
@@ -27,7 +26,6 @@ export function drawPolygon(ctx, vertices) {
     ctx.stroke();
 }
 
-// Função para escalar um ponto
 function scalePoint(point, scaleFactor, origin) {
     return {
         x: origin.x + (point.x - origin.x) * scaleFactor,
@@ -35,7 +33,6 @@ function scalePoint(point, scaleFactor, origin) {
     };
 }
 
-// Função para escalar o polígono
 export function scalePolygon(vertices, scaleFactor) {
     const centerX = vertices.reduce((sum, v) => sum + v.x, 0) / vertices.length;
     const centerY = vertices.reduce((sum, v) => sum + v.y, 0) / vertices.length;
@@ -44,12 +41,10 @@ export function scalePolygon(vertices, scaleFactor) {
     return vertices.map(vertex => scalePoint(vertex, scaleFactor, origin));
 }
 
-// Função para inicializar o programa
 export function init() {
     const ctx = createCanvas();
     const vertices = [];
 
-    // Evento de clique para adicionar vértices
     ctx.canvas.addEventListener('click', (event) => {
         const rect = ctx.canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;

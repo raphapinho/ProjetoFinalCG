@@ -15,7 +15,6 @@ function createGaussianKernel(size, sigma) {
         }
     }
 
-    // Normalize the kernel
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
             kernel[x][y] /= sum;
@@ -38,7 +37,6 @@ function applyGaussianFilter(imageData) {
         for (let x = 0; x < width; x++) {
             let r = 0, g = 0, b = 0;
 
-            // Apply Gaussian filter
             for (let ky = -halfKernel; ky <= halfKernel; ky++) {
                 for (let kx = -halfKernel; kx <= halfKernel; kx++) {
                     const nx = x + kx;
@@ -56,7 +54,7 @@ function applyGaussianFilter(imageData) {
             result[idx] = r;
             result[idx + 1] = g;
             result[idx + 2] = b;
-            result[idx + 3] = 255; // Alpha
+            result[idx + 3] = 255;
         }
     }
 

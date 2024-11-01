@@ -8,16 +8,13 @@ const RIGHT = 2; // 0010
 const BOTTOM = 4; // 0100
 const TOP = 8; // 1000
 
-// Definindo x_max, y_max e x_min, y_min para o retângulo de recorte
 const x_max = 10;
 const y_max = 8;
 const x_min = 4;
 const y_min = 4;
 
-// Armazenar os pontos escolhidos
 let points = [];
 
-// Função para computar o código da região para um ponto (x, y)
 function computeCode(x, y) {
     let code = INSIDE;
     if (x < x_min) code |= LEFT;
@@ -27,7 +24,6 @@ function computeCode(x, y) {
     return code;
 }
 
-// Implementando o algoritmo Cohen-Sutherland
 function cohenSutherlandClip(x1, y1, x2, y2) {
     let code1 = computeCode(x1, y1);
     let code2 = computeCode(x2, y2);
@@ -87,7 +83,6 @@ function cohenSutherlandClip(x1, y1, x2, y2) {
     }
 }
 
-// Função para desenhar o retângulo de recorte
 function drawRectangle(ctx) {
     ctx.beginPath();
     ctx.rect(x_min * 20, y_min * 20, (x_max - x_min) * 20, (y_max - y_min) * 20);
@@ -95,7 +90,6 @@ function drawRectangle(ctx) {
     ctx.stroke();
 }
 
-// Função para desenhar a linha
 function drawLine(ctx, x1, y1, x2, y2, color) {
     ctx.beginPath();
     ctx.moveTo(x1 * 20, y1 * 20);
@@ -104,22 +98,18 @@ function drawLine(ctx, x1, y1, x2, y2, color) {
     ctx.stroke();
 }
 
-// Adicionando um manipulador de eventos de clique ao canvas
 document.getElementById("canvas").addEventListener("click", function(event) {
     const canvas = this;
     const rect = canvas.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / 20; // Converte para coordenadas do sistema
-    const y = (event.clientY - rect.top) / 20; // Converte para coordenadas do sistema
+    const x = (event.clientX - rect.left) / 20;
+    const y = (event.clientY - rect.top) / 20;
 
-    // Adiciona o ponto ao array
     points.push({ x, y });
 
-    // Limita a quantidade de pontos a 2
     if (points.length > 2) {
-        points.shift(); // Remove o ponto mais antigo se houver mais de 2
+        points.shift();
     }
 
-    // Desenha todos os pontos escolhidos
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawRectangle(ctx);
@@ -127,14 +117,12 @@ document.getElementById("canvas").addEventListener("click", function(event) {
         drawPoint(ctx, point.x, point.y);
     });
 
-    // Quando houver 2 pontos, chama a função de recorte
     if (points.length === 2) {
         cohenSutherlandClip(points[0].x, points[0].y, points[1].x, points[1].y);
-        points = []; // Limpa os pontos após o recorte
+        points = [];
     }
 });
 
-// Função para desenhar um ponto no canvas
 function drawPoint(ctx, x, y) {
     ctx.beginPath();
     ctx.arc(x * 20, y * 20, 3, 0, 2 * Math.PI);

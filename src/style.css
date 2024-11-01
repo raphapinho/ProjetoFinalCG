@@ -65,13 +65,13 @@ button:hover {
 
 .button-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte se não houver espaço */
-  justify-content: center; /* Centraliza os botões */
-  gap: 10px; /* Espaço entre os botões */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 .optionButton {
-  flex: 1 1 calc(30% - 10px); /* Cada botão ocupará 30% da largura, menos um espaço de 10px */
+  flex: 1 1 calc(30% - 10px);
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
@@ -80,7 +80,7 @@ button:hover {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s, transform 0.2s;
-  min-width: 150px; /* Garantir que os botões não fiquem muito pequenos */
+  min-width: 150px;
 }
 
 .optionButton:hover {
@@ -114,7 +114,7 @@ input[type="checkbox"]:checked + span {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s, transform 0.2s;
-  margin-top: 10px; /* Adiciona um espaçamento acima do botão */
+  margin-top: 10px;
 }
 
 .label-upload:hover {

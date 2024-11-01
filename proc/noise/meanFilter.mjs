@@ -15,7 +15,6 @@ function applyMeanFilter(imageData) {
         for (let x = 0; x < width; x++) {
             let r = 0, g = 0, b = 0, count = 0;
 
-            // Apply mean filter
             for (let ky = -halfKernel; ky <= halfKernel; ky++) {
                 for (let kx = -halfKernel; kx <= halfKernel; kx++) {
                     const nx = x + kx;
@@ -34,7 +33,7 @@ function applyMeanFilter(imageData) {
             result[idx] = r / count;
             result[idx + 1] = g / count;
             result[idx + 2] = b / count;
-            result[idx + 3] = 255; // Alpha
+            result[idx + 3] = 255;
         }
     }
 
