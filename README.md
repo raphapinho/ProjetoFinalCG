@@ -32,9 +32,11 @@ O trabalho prático envolve duas partes principais:
 **Entrega**:
 
 - Data limite: 31/10/2024 até 23:59 via SIGAA.
-- Vídeo explicativo do código fonte e implementação dos algoritmos.
-        Raphael Freitas Drago Pinho: <https://www.youtube.com/watch?v=c5ZRXfXMLpg> (Síntese)
-        Thiago Correa de Castro:  <https://www.youtube.com/watch?v=STyfhO3b3MY> (Projeções)
-        Thiago Correa de Castro:  <https://www.youtube.com/watch?v=7a-wx9BsC_E> (Processamento)
+<p style="text-align:center;">Vídeo explicativo do código fonte e implementação dos algoritmos:</p>
+   <ol type="1">
+     <li>Raphael Freitas Drago Pinho: <https://www.youtube.com/watch?v=c5ZRXfXMLpg> (Síntese)</li>
+     <li>Thiago Correa de Castro:  <https://www.youtube.com/watch?v=STyfhO3b3MY> (Projeções)</li>
+     <li>Thiago Correa de Castro:  <https://www.youtube.com/watch?v=7a-wx9BsC_E> (Processamento)</li>
+   </ol>
 - Código anexado ou link para GitHub.
 - Postagem no SIGAA até 28/10/2024 dará 1 ponto extra.

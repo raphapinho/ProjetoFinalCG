@@ -10,11 +10,10 @@ export function createCanvas() {
     return canvas.getContext('2d');
 }
 
-// Função para desenhar um polígono
 export function drawPolygon(ctx, vertices) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Limpa o canvas
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    if (vertices.length < 3) return; // Verifica se há vértices suficientes para desenhar um polígono
+    if (vertices.length < 3) return;
 
     ctx.beginPath();
     ctx.moveTo(vertices[0].x, vertices[0].y);
@@ -27,7 +26,6 @@ export function drawPolygon(ctx, vertices) {
     ctx.stroke();
 }
 
-// Função para transladar um ponto
 function translatePoint(point, dx, dy) {
     return {
         x: point.x + dx,
@@ -35,17 +33,14 @@ function translatePoint(point, dx, dy) {
     };
 }
 
-// Função para transladar o polígono
 export function translatePolygon(vertices, dx, dy) {
     return vertices.map(vertex => translatePoint(vertex, dx, dy));
 }
 
-// Função para inicializar o programa
 export function init() {
     const ctx = createCanvas();
     const vertices = [];
 
-    // Evento de clique para adicionar vértices
     ctx.canvas.addEventListener('click', (event) => {
         const rect = ctx.canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
@@ -55,7 +50,6 @@ export function init() {
         drawPolygon(ctx, vertices);
     });
 
-    // Pergunta para a translação
     document.getElementById('translate-btn').addEventListener('click', () => {
         const startX = parseFloat(prompt("Digite a coordenada X inicial:"));
         const startY = parseFloat(prompt("Digite a coordenada Y inicial:"));
