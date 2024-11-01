@@ -1,4 +1,6 @@
-// prewittEdgeDetection.mjs
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
 
 function applyPrewittOperator(imageData) {
     const width = imageData.width;

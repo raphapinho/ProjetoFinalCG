@@ -1,4 +1,6 @@
-// gaussianFilter.mjs
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
 
 function createGaussianKernel(size, sigma) {
     const kernel = new Array(size).fill(0).map(() => new Array(size).fill(0));

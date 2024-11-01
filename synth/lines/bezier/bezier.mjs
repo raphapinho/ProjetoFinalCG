@@ -1,3 +1,7 @@
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 class Bezier {
   constructor(...args) {
     if (args.length === 6) {

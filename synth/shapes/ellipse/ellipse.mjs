@@ -1,3 +1,7 @@
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 export function drawEllipse(x0, y0, x1, y1, filled) {
     const points = [];
     

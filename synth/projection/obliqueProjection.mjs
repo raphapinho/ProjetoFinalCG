@@ -1,4 +1,7 @@
-// obliqueProjection.mjs
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 export function obliqueProjection(vertices, angle) {
     const projectedVertices = [];
     const sinAngle = Math.sin(angle);

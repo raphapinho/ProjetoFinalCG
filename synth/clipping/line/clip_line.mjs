@@ -1,4 +1,7 @@
-// Definindo os códigos de região
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 const INSIDE = 0; // 0000
 const LEFT = 1; // 0001
 const RIGHT = 2; // 0010

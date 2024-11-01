@@ -1,3 +1,7 @@
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 import { processImage as sobelProcess } from './sobelEdgeDetection.mjs';
 import { processImage as prewittProcess } from './prewittEdgeDetection.mjs';
 import { processImage as cannyProcess } from './cannyEdgeDetection.mjs';

@@ -1,6 +1,7 @@
-// esc_poly.mjs
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
 
-// Função para criar o canvas
 export function createCanvas() {
     const canvas = document.createElement('canvas');
     canvas.width = 800;

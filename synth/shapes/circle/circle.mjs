@@ -1,4 +1,7 @@
-// circle.mjs
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 export function drawCircle(x0, y0, x1, y1, filled = false) {
     const points = [];
     

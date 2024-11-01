@@ -1,3 +1,7 @@
+// Discentes 
+//    Raphael Freitas Drago Pinho - 202004940023
+//    Thiago Correa de Castro - 202004940005
+
 export function orthogonalProjection(vertices, type = 'XY', T = 0) {
     switch(type) {
         case 'XY':

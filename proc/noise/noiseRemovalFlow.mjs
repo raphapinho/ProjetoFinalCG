@@ -1,7 +1,7 @@
 // noiseRemovalFlow.mjs
 
 import { processImage as processMedian } from './medianFilter.mjs';
-import { processImage as processMean } from './meanFilter.mjs'; // Assumindo que você tenha um arquivo meanFilter.mjs
+import { processImage as processMean } from './meanFilter.mjs';
 import { processImage as processGaussian } from './gaussianFilter.mjs';
 
 export function setupNoiseRemoval(canvas, ctx) {
