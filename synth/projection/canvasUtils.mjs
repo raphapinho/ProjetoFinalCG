@@ -10,11 +10,10 @@ export function createCanvas() {
     return canvas.getContext('2d');
 }
 
-// Função para desenhar um polígono
 export function drawPolygon(ctx, vertices) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Limpa o canvas
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    if (vertices.length < 3) return; // Verifica se há vértices suficientes para desenhar um polígono
+    if (vertices.length < 3) return;
 
     ctx.beginPath();
     ctx.moveTo(vertices[0].x, vertices[0].y);

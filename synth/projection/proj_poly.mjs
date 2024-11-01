@@ -7,37 +7,31 @@ import { orthogonalProjection, axonometricProjection } from './orthogonalProject
 import { obliqueProjection } from './obliqueProjection.mjs';
 import { perspectiveProjection } from './perspectiveProjection.mjs';
 
-// Função para inicializar o programa
 export function init() {
     const ctx = createCanvas();
     const vertices = [];
 
-    // Pergunta quantos pontos terá o polígono
     const numPoints = parseInt(prompt("Quantos pontos terá o polígono?"));
 
-    // Evento de clique para adicionar vértices
     ctx.canvas.addEventListener('click', (event) => {
         if (vertices.length < numPoints) {
             const rect = ctx.canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
             
-            vertices.push({ x, y, z: 0 }); // Adicionando uma propriedade z
+            vertices.push({ x, y, z: 0 });
             drawPolygon(ctx, vertices);
         }
 
         if (vertices.length === numPoints) {
-            // Pergunta ao usuário qual tipo de projeção deseja
             const projectionType = prompt("Escolha o número do tipo de projeção: 1. (ortogonal), 2. (oblíqua) ou 3. (perspectiva)").toLowerCase();
 
-            // Executa a projeção escolhida
             let projectedVertices;
 
             if (projectionType === '1') {
                 const orthoType = prompt("Escolha o tipo de projeção ortográfica: XY, XZ ou YZ").toUpperCase();
                 projectedVertices = orthogonalProjection(vertices, orthoType);
                 
-                // Ajustar para desenho em 2D
                 if (orthoType === 'XZ') {
                     projectedVertices = projectedVertices.map(vertex => ({ x: vertex.x, y: 0 })); // Manter y = 0
                 } else if (orthoType === 'YZ') {
